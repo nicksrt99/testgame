@@ -13,6 +13,7 @@ const DEBUG_TEXT_LINE_HEIGHT = 50;
 
 // Игрок
 const PLAYER_SIZE = 50;           // сторона квадрата в точках
-const PLAYER_COLOR = "#1d1d1b";   // серый
+const PLAYER_COLOR = "#1d1d1b"; // серый
 const PLAYER_START_X = 300;       // где игрок появляется (левый верхний угол квадрата)
-const PLAYER_START_Y = 500;
+const PLAYER_START_Y = 500;       
+const PLAYER_SPEED = 3;           // на сколько точек игрок сдвигается за один кадр

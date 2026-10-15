@@ -28,6 +28,9 @@ function update(currentTime) {
     framesThisSecond = 0;       // начинаем считать заново
     lastFpsTime = currentTime;  // новая секунда началась сейчас
   }
+  
+  // Двигаем игрока
+  updatePlayer();
 }
 
 // Рисует всю картинку заново
