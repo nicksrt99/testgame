@@ -36,6 +36,9 @@ function draw() {
   context.fillStyle = BACKGROUND_COLOR;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
+  // Рисуем игрока
+  drawPlayer();
+
   // Пишем номер кадра в углу
   context.fillStyle = DEBUG_TEXT_COLOR;
   context.font = DEBUG_TEXT_FONT;
