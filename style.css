@@ -1,0 +1,16 @@
+/* Убираем отступы, которые браузер добавляет сам,
+   и запрещаем прокрутку страницы */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Холст занимает всё окно.
+   display: block убирает маленькую щель снизу под холстом */
+#gameCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
