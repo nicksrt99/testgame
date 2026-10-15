@@ -10,6 +10,9 @@ let fps = 0;              // число, которое показываем н�
 let framesThisSecond = 0; // сколько кадров набралось в текущей секунде
 let lastFpsTime = 0;      // время (в мс), когда началась текущая секунда
 
+// Время прошлого кадра (в мс) — чтобы узнать, сколько прошло с тех пор
+let lastFrameTime = 0;
+
 // Подгоняет размер холста под размер окна.
 // Без этого внутри холста было бы всего 300×150 точек, и картинка была бы мутной.
 function resizeCanvas() {
@@ -18,7 +21,7 @@ function resizeCanvas() {
 }
 
 // Обновляет состояние игры: здесь всё, что меняется со временем
-function update(currentTime) {
+function update(currentTime, deltaTime) {
   frameCount = frameCount + 1;
   framesThisSecond = framesThisSecond + 1;
   
@@ -30,7 +33,7 @@ function update(currentTime) {
   }
   
   // Двигаем игрока
-  updatePlayer();
+  updatePlayer(deltaTime);
 }
 
 // Рисует всю картинку заново
@@ -42,20 +45,29 @@ function draw() {
   // Рисуем игрока
   drawPlayer();
 
-    // Отладка в углу: номер кадра, FPS и координаты игрока
+  // Отладка в углу: номер кадра, FPS и координаты игрока
   context.fillStyle = DEBUG_TEXT_COLOR;
   context.font = DEBUG_TEXT_FONT;
   context.fillText("Кадр: " + frameCount, DEBUG_TEXT_X, DEBUG_TEXT_Y);
   context.fillText("FPS: " + fps, DEBUG_TEXT_X, DEBUG_TEXT_Y + DEBUG_TEXT_LINE_HEIGHT);
   context.fillText(
-    "X: " + player.x + "  Y: " + player.y, 
+    "X: " + Math.round(player.x) + "  Y: " + Math.round(player.y), 
     DEBUG_TEXT_X, DEBUG_TEXT_Y + DEBUG_TEXT_LINE_HEIGHT * 2
   );
 }
 
-// Игровой цикл: обновить → нарисовать → попросить браузер повторить
+// Игровой цикл: посчитать время → обновить → нарисовать → попросить браузер повторить
 function gameLoop(currentTime) {
-  update(currentTime);
+  // Сколько секунд прошло с прошлого кадра (delta time)
+  let deltaTime = (currentTime - lastFrameTime) / 1000;
+  lastFrameTime = currentTime;
+
+  // Защита: если вкладка была свёрнута, прошло много времени — не даём игроку прыгнуть
+  if (deltaTime > MAX_DELTA_TIME) {
+    deltaTime = MAX_DELTA_TIME;
+  }
+
+  update(currentTime, deltaTime);
   draw();
   requestAnimationFrame(gameLoop);
 }

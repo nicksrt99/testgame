@@ -16,25 +16,26 @@ function drawPlayer() {
 }
 
 
-// Двигает игрока, если зажаты клавиши направлений (стрелки или WASD)
-function updatePlayer() {
+// Двигает игрока, если зажаты клавиши направлений (стрелки или WASD).
+// deltaTime — сколько секунд прошло с прошлого кадра: шаг = скорость × время
+function updatePlayer(deltaTime) {
   // Вверх: y уменьшается, потому что на холсте y растёт вниз
   if (isKeyPressed("KeyW") || isKeyPressed("ArrowUp")) {
-    player.y = player.y - player.speed;
+    player.y = player.y - player.speed * deltaTime;
   }
 
   // Вниз: y увеличивается
   if (isKeyPressed("KeyS") || isKeyPressed("ArrowDown")) {
-    player.y = player.y + player.speed;
+    player.y = player.y + player.speed * deltaTime;
   }
 
   // Влево: x уменьшается
   if (isKeyPressed("KeyA") || isKeyPressed("ArrowLeft")) {
-    player.x = player.x - player.speed;
+    player.x = player.x - player.speed * deltaTime;
   }
 
   // Вправо: x увеличивается
   if (isKeyPressed("KeyD") || isKeyPressed("ArrowRight")) {
-    player.x = player.x + player.speed;
+    player.x= player.x + player.speed * deltaTime;
   }
 }
