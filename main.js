@@ -39,11 +39,15 @@ function draw() {
   // Рисуем игрока
   drawPlayer();
 
-  // Пишем номер кадра в углу
+    // Отладка в углу: номер кадра, FPS и координаты игрока
   context.fillStyle = DEBUG_TEXT_COLOR;
   context.font = DEBUG_TEXT_FONT;
   context.fillText("Кадр: " + frameCount, DEBUG_TEXT_X, DEBUG_TEXT_Y);
   context.fillText("FPS: " + fps, DEBUG_TEXT_X, DEBUG_TEXT_Y + DEBUG_TEXT_LINE_HEIGHT);
+  context.fillText(
+    "X: " + player.x + "  Y: " + player.y, 
+    DEBUG_TEXT_X, DEBUG_TEXT_Y + DEBUG_TEXT_LINE_HEIGHT * 2
+  );
 }
 
 // Игровой цикл: обновить → нарисовать → попросить браузер повторить
